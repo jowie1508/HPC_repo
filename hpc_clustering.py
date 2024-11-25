@@ -112,7 +112,7 @@ def extract_tfidf_keywords(documents, max_features=10):
 # Main pipeline function
 def main():
     # Load the dataset
-    download_dataset()
+    # download_dataset()
     update_status("Loading dataset...")
     df = load_data(FILE)
     # uncomment while testing
