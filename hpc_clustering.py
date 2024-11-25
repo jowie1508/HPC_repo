@@ -15,6 +15,11 @@ from collections import Counter
 import logging
 import subprocess
 
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('punkt_tab')
+
 # Setup logging
 logging.basicConfig(
     level=logging.INFO,
