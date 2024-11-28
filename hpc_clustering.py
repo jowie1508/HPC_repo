@@ -4,6 +4,8 @@ import random
 import re
 import pandas as pd
 import numpy as np
+
+import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -14,6 +16,10 @@ from sentence_transformers import SentenceTransformer
 from collections import Counter
 import logging
 import subprocess
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('punkt_tab')
 
 # Setup logging
 logging.basicConfig(
@@ -107,24 +113,37 @@ def extract_tfidf_keywords(documents, max_features=10):
 # Main pipeline function
 def main():
     # Load the dataset
-    download_dataset()
+   #  d# # ownload_dataset()
     update_status("Loading dataset...")
-    df = load_data(FILE)
+   # df = load_data(FILE)
     # uncomment while testing
     #df = df.sample(frac=0.001, random_state=42)
 
     # Preprocess the dataset
-    stop_words = set(stopwords.words("english"))
-    df["content"] = df["title"] + " " + df["abstract"]
-    df["cleaned_content"] = [
-        preprocess_text_fast(text, stop_words) for text in df["content"]
-    ]
-    df["main_category"] = df["categories"].apply(extract_main_category)
-    df["cleaned_content"] = remove_least_used_fast(df["cleaned_content"], N=10)
-    df["cleaned_content_str"] = df["cleaned_content"].apply(lambda x: " ".join(x))
+    #stop_words = set(stopwords.words("english"))
+    #df["content"] = df["title"] + " " + df["abstract"]
+    #df["cleaned_content"] = [
+    #    preprocess_text_fast(text, stop_words) for text in df["content"]
+    #]
+    #df["main_category"] = df["categories"].apply(extract_main_category)
+    #df["cleaned_content"] = remove_least_used_fast(df["cleaned_content"], N=10)
+    #df["cleaned_content_str"] = df["cleaned_content"].apply(lambda x: " ".join(x))
+    df = pd.read_csv("preprocessed_data.csv")
+    update_status("Loaded dataset...")
+   
+   # Optimize parameters for each category
+   
+   # File to save progress
+    results_file = "optimization_results.json"
 
-    # Optimize parameters for each category
-    categories_to_test = ["cs", "math"] # df["main_category"].unique()
+    # Load existing results if available
+    if os.path.exists(results_file):
+        with open(results_file, "r") as f:
+            results_per_category = json.load(f)
+    else:
+        results_per_category = {}
+   
+    categories_to_test = df["main_category"].unique().tolist()
     update_status(f"Number of categories (total): {len(categories_to_test)}")
     results_per_category = {}
     df_optimize = df.sample(frac=0.1, random_state=42)
@@ -146,8 +165,16 @@ def main():
         }
         for _ in range(10)
     ]
-
+    # Reorder categories_to_test to prioritize 'adap-org'
+    failing_category = "adap-org"
+    if failing_category in categories_to_test:
+        categories_to_test.remove(failing_category)
+    categories_to_test = [failing_category] + categories_to_test
     for category in categories_to_test:
+       # Skip already processed categories
+        if category in results_per_category:
+            update_status(f"Skipping already processed category: {category}")
+            continue
         update_status(f"Optimizing for category: {category}")
         category_df = df[df["main_category"] == category]
         content = category_df["cleaned_content_str"].tolist()
@@ -155,29 +182,40 @@ def main():
 
         category_results = []
         for params in random_combinations:
-            reducer = UMAP(
-                n_neighbors=params["n_neighbors"],
-                min_dist=params["min_dist"],
-                n_components=5,
-                metric="cosine",
-            )
-            reduced_embeddings = reducer.fit_transform(embeddings)
+            try:
+                reducer = UMAP(
+                    n_neighbors=params["n_neighbors"],
+                    min_dist=params["min_dist"],
+                    n_components=5,
+                    metric="cosine",
+                )
+                reduced_embeddings = reducer.fit_transform(embeddings)
 
-            clusterer = hdbscan.HDBSCAN(
-                min_cluster_size=params["min_cluster_size"],
-                min_samples=params["min_samples"],
-            )
-            labels = clusterer.fit_predict(reduced_embeddings)
+                clusterer = hdbscan.HDBSCAN(
+                    min_cluster_size=params["min_cluster_size"],
+                    min_samples=params["min_samples"],
+                )
+                labels = clusterer.fit_predict(reduced_embeddings)
 
-            if len(set(labels)) > 1:
-                dbi = davies_bouldin_score(reduced_embeddings, labels)
-            else:
-                dbi = float("inf")
-            category_results.append({**params, "dbi": dbi})
+                if len(set(labels)) > 1:
+                    dbi = davies_bouldin_score(reduced_embeddings, labels)
+                else:
+                    dbi = float("inf")
+                category_results.append({**params, "dbi": dbi})
+            except Exception as e:
+                update_status(f"Error during optimization for category '{category}' with params {params}: {e}")
+                continue
+        if category_results:    
+            best_params = min(category_results, key=lambda x: x["dbi"])
+            results_per_category[category] = best_params
+            # Save progress after each category
+            with open(results_file, "w") as f:
+                json.dump(results_per_category, f, indent=4)
 
-        best_params = min(category_results, key=lambda x: x["dbi"])
-        results_per_category[category] = best_params
-
+            update_status(f"Completed optimization for category: {category}")
+        else:
+            update_status(f"No valid results for category '{category}'. Skipping.")
+    
     update_status("Parameter optimization completed.")
 
     # Final clustering and saving results
