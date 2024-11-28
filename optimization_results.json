@@ -1,0 +1,163 @@
+{
+    "physics": {
+        "n_neighbors": 30,
+        "min_dist": 0.5,
+        "min_cluster_size": 5,
+        "min_samples": 10,
+        "dbi": 1.1097569231707751
+    },
+    "math": {
+        "n_neighbors": 15,
+        "min_dist": 0.3,
+        "min_cluster_size": 10,
+        "min_samples": 5,
+        "dbi": 0.47169029944757424
+    },
+    "astro-ph": {
+        "n_neighbors": 15,
+        "min_dist": 0.3,
+        "min_cluster_size": 10,
+        "min_samples": 5,
+        "dbi": 0.7897396983361874
+    },
+    "quant-ph": {
+        "n_neighbors": 30,
+        "min_dist": 0.01,
+        "min_cluster_size": 50,
+        "min_samples": 10,
+        "dbi": 1.0564242732266103
+    },
+    "hep-th": {
+        "n_neighbors": 15,
+        "min_dist": 0.1,
+        "min_cluster_size": 20,
+        "min_samples": 5,
+        "dbi": 1.0615176480988053
+    },
+    "cond-mat": {
+        "n_neighbors": 15,
+        "min_dist": 0.1,
+        "min_cluster_size": 5,
+        "min_samples": 10,
+        "dbi": 1.0826741723523143
+    },
+    "math-ph": {
+        "n_neighbors": 15,
+        "min_dist": 0.1,
+        "min_cluster_size": 20,
+        "min_samples": 5,
+        "dbi": 0.5466018757304484
+    },
+    "cs": {
+        "n_neighbors": 50,
+        "min_dist": 0.5,
+        "min_cluster_size": 10,
+        "min_samples": 10,
+        "dbi": 0.7690661448158965
+    },
+    "gr-qc": {
+        "n_neighbors": 15,
+        "min_dist": 0.5,
+        "min_cluster_size": 10,
+        "min_samples": 10,
+        "dbi": 1.0661910909770416
+    },
+    "hep-ph": {
+        "n_neighbors": 15,
+        "min_dist": 0.1,
+        "min_cluster_size": 20,
+        "min_samples": 5,
+        "dbi": 0.9783611931793462
+    },
+    "q-fin": {
+        "n_neighbors": 15,
+        "min_dist": 0.1,
+        "min_cluster_size": 20,
+        "min_samples": 5,
+        "dbi": 1.0326403990385016
+    },
+    "q-bio": {
+        "n_neighbors": 30,
+        "min_dist": 0.01,
+        "min_cluster_size": 50,
+        "min_samples": 10,
+        "dbi": 1.146674104388946
+    },
+    "nucl-th": {
+        "n_neighbors": 15,
+        "min_dist": 0.1,
+        "min_cluster_size": 20,
+        "min_samples": 5,
+        "dbi": 0.7178047426169669
+    },
+    "hep-ex": {
+        "n_neighbors": 30,
+        "min_dist": 0.01,
+        "min_cluster_size": 50,
+        "min_samples": 10,
+        "dbi": 1.0506188283019815
+    },
+    "stat": {
+        "n_neighbors": 30,
+        "min_dist": 0.5,
+        "min_cluster_size": 5,
+        "min_samples": 10,
+        "dbi": 1.0893743057778809
+    },
+    "nlin": {
+        "n_neighbors": 30,
+        "min_dist": 0.01,
+        "min_cluster_size": 50,
+        "min_samples": 10,
+        "dbi": 0.43950049002644975
+    },
+    "hep-lat": {
+        "n_neighbors": 30,
+        "min_dist": 0.3,
+        "min_cluster_size": 20,
+        "min_samples": 1,
+        "dbi": 0.6790901834372983
+    },
+    "nucl-ex": {
+        "n_neighbors": 15,
+        "min_dist": 0.1,
+        "min_cluster_size": 20,
+        "min_samples": 5,
+        "dbi": 0.41534348216408107
+    },
+    "econ": {
+        "n_neighbors": 30,
+        "min_dist": 0.01,
+        "min_cluster_size": 50,
+        "min_samples": 10,
+        "dbi": 1.0882438617811692
+    },
+    "eess": {
+        "n_neighbors": 30,
+        "min_dist": 0.5,
+        "min_cluster_size": 5,
+        "min_samples": 10,
+        "dbi": 1.2124418843903377
+    },
+    "chao-dyn": {
+        "n_neighbors": 50,
+        "min_dist": 0.5,
+        "min_cluster_size": 10,
+        "min_samples": 10,
+        "dbi": Infinity
+    },
+    "q-alg": {
+        "n_neighbors": 50,
+        "min_dist": 0.5,
+        "min_cluster_size": 10,
+        "min_samples": 10,
+        "dbi": Infinity
+    },
+    "solv-int": {
+        "n_neighbors": 50,
+        "min_dist": 0.5,
+        "min_cluster_size": 10,
+        "min_samples": 10,
+        "dbi": Infinity
+    }
+}

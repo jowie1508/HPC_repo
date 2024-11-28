@@ -1,0 +1,169 @@
+2024-11-28 00:25:16,663 - INFO - Loading dataset...
+2024-11-28 00:25:56,890 - INFO - Loaded dataset...
+2024-11-28 00:25:56,933 - INFO - Number of categories (total): 31
+2024-11-28 00:25:57,376 - INFO - Use pytorch device_name: cuda
+2024-11-28 00:25:57,376 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-11-28 00:26:00,012 - INFO - Optimizing for category: adap-org
+2024-11-28 00:26:05,276 - INFO - Error during optimization for category 'adap-org' with params {'n_neighbors': 50, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 00:26:05,279 - INFO - Error during optimization for category 'adap-org' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 20, 'min_samples': 5}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 00:26:05,281 - INFO - Error during optimization for category 'adap-org' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 5, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 00:26:05,283 - INFO - Error during optimization for category 'adap-org' with params {'n_neighbors': 15, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 00:26:05,285 - INFO - Error during optimization for category 'adap-org' with params {'n_neighbors': 30, 'min_dist': 0.5, 'min_cluster_size': 5, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 00:26:05,286 - INFO - Error during optimization for category 'adap-org' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 50, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 00:26:05,288 - INFO - Error during optimization for category 'adap-org' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 10, 'min_samples': 5}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 00:26:05,290 - INFO - Error during optimization for category 'adap-org' with params {'n_neighbors': 50, 'min_dist': 0.01, 'min_cluster_size': 20, 'min_samples': 1}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 00:26:05,292 - INFO - Error during optimization for category 'adap-org' with params {'n_neighbors': 30, 'min_dist': 0.3, 'min_cluster_size': 20, 'min_samples': 1}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 00:26:05,294 - INFO - Error during optimization for category 'adap-org' with params {'n_neighbors': 15, 'min_dist': 0.3, 'min_cluster_size': 10, 'min_samples': 5}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 00:26:05,294 - INFO - No valid results for category 'adap-org'. Skipping.
+2024-11-28 00:26:05,294 - INFO - Optimizing for category: physics
+2024-11-28 00:48:13,329 - INFO - Completed optimization for category: physics
+2024-11-28 00:48:13,330 - INFO - Optimizing for category: math
+2024-11-28 02:02:37,989 - INFO - Completed optimization for category: math
+2024-11-28 02:02:37,991 - INFO - Optimizing for category: astro-ph
+2024-11-28 02:25:33,572 - INFO - Completed optimization for category: astro-ph
+2024-11-28 02:25:33,573 - INFO - Optimizing for category: quant-ph
+2024-11-28 02:36:52,572 - INFO - Completed optimization for category: quant-ph
+2024-11-28 02:36:52,572 - INFO - Optimizing for category: hep-th
+2024-11-28 02:41:39,280 - INFO - Completed optimization for category: hep-th
+2024-11-28 02:41:39,280 - INFO - Optimizing for category: cond-mat
+2024-11-28 03:07:40,820 - INFO - Completed optimization for category: cond-mat
+2024-11-28 03:07:40,822 - INFO - Optimizing for category: math-ph
+2024-11-28 03:10:40,946 - INFO - Completed optimization for category: math-ph
+2024-11-28 03:10:40,947 - INFO - Optimizing for category: cs
+2024-11-28 05:57:10,624 - INFO - Completed optimization for category: cs
+2024-11-28 05:57:10,625 - INFO - Optimizing for category: gr-qc
+2024-11-28 06:01:34,528 - INFO - Completed optimization for category: gr-qc
+2024-11-28 06:01:34,529 - INFO - Optimizing for category: hep-ph
+2024-11-28 06:07:58,482 - INFO - Completed optimization for category: hep-ph
+2024-11-28 06:07:58,483 - INFO - Optimizing for category: q-fin
+2024-11-28 06:10:00,534 - INFO - Completed optimization for category: q-fin
+2024-11-28 06:10:00,535 - INFO - Optimizing for category: q-bio
+2024-11-28 06:12:37,026 - INFO - Completed optimization for category: q-bio
+2024-11-28 06:12:37,027 - INFO - Optimizing for category: nucl-th
+2024-11-28 06:15:10,306 - INFO - Completed optimization for category: nucl-th
+2024-11-28 06:15:10,306 - INFO - Optimizing for category: hep-ex
+2024-11-28 06:17:00,544 - INFO - Completed optimization for category: hep-ex
+2024-11-28 06:17:00,544 - INFO - Optimizing for category: stat
+2024-11-28 06:23:42,117 - INFO - Completed optimization for category: stat
+2024-11-28 06:23:42,118 - INFO - Optimizing for category: nlin
+2024-11-28 06:25:26,649 - INFO - Completed optimization for category: nlin
+2024-11-28 06:25:26,650 - INFO - Optimizing for category: hep-lat
+2024-11-28 06:27:48,718 - INFO - Completed optimization for category: hep-lat
+2024-11-28 06:27:48,719 - INFO - Optimizing for category: nucl-ex
+2024-11-28 06:29:41,215 - INFO - Completed optimization for category: nucl-ex
+2024-11-28 06:29:41,216 - INFO - Optimizing for category: econ
+2024-11-28 06:32:30,610 - INFO - Completed optimization for category: econ
+2024-11-28 06:32:30,611 - INFO - Optimizing for category: eess
+2024-11-28 06:45:01,020 - INFO - Completed optimization for category: eess
+2024-11-28 06:45:01,021 - INFO - Optimizing for category: alg-geom
+2024-11-28 06:45:01,464 - INFO - Error during optimization for category 'alg-geom' with params {'n_neighbors': 50, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,468 - INFO - Error during optimization for category 'alg-geom' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 20, 'min_samples': 5}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,472 - INFO - Error during optimization for category 'alg-geom' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 5, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,475 - INFO - Error during optimization for category 'alg-geom' with params {'n_neighbors': 15, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,478 - INFO - Error during optimization for category 'alg-geom' with params {'n_neighbors': 30, 'min_dist': 0.5, 'min_cluster_size': 5, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,481 - INFO - Error during optimization for category 'alg-geom' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 50, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,485 - INFO - Error during optimization for category 'alg-geom' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 10, 'min_samples': 5}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,488 - INFO - Error during optimization for category 'alg-geom' with params {'n_neighbors': 50, 'min_dist': 0.01, 'min_cluster_size': 20, 'min_samples': 1}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,491 - INFO - Error during optimization for category 'alg-geom' with params {'n_neighbors': 30, 'min_dist': 0.3, 'min_cluster_size': 20, 'min_samples': 1}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,494 - INFO - Error during optimization for category 'alg-geom' with params {'n_neighbors': 15, 'min_dist': 0.3, 'min_cluster_size': 10, 'min_samples': 5}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,494 - INFO - No valid results for category 'alg-geom'. Skipping.
+2024-11-28 06:45:01,495 - INFO - Optimizing for category: chao-dyn
+2024-11-28 06:45:01,792 - INFO - Completed optimization for category: chao-dyn
+2024-11-28 06:45:01,792 - INFO - Optimizing for category: cmp-lg
+2024-11-28 06:45:01,853 - INFO - Error during optimization for category 'cmp-lg' with params {'n_neighbors': 50, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:01,856 - INFO - Error during optimization for category 'cmp-lg' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 20, 'min_samples': 5}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:01,858 - INFO - Error during optimization for category 'cmp-lg' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 5, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:01,860 - INFO - Error during optimization for category 'cmp-lg' with params {'n_neighbors': 15, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:01,862 - INFO - Error during optimization for category 'cmp-lg' with params {'n_neighbors': 30, 'min_dist': 0.5, 'min_cluster_size': 5, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:01,863 - INFO - Error during optimization for category 'cmp-lg' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 50, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:01,865 - INFO - Error during optimization for category 'cmp-lg' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 10, 'min_samples': 5}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:01,867 - INFO - Error during optimization for category 'cmp-lg' with params {'n_neighbors': 50, 'min_dist': 0.01, 'min_cluster_size': 20, 'min_samples': 1}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:01,869 - INFO - Error during optimization for category 'cmp-lg' with params {'n_neighbors': 30, 'min_dist': 0.3, 'min_cluster_size': 20, 'min_samples': 1}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:01,871 - INFO - Error during optimization for category 'cmp-lg' with params {'n_neighbors': 15, 'min_dist': 0.3, 'min_cluster_size': 10, 'min_samples': 5}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:01,871 - INFO - No valid results for category 'cmp-lg'. Skipping.
+2024-11-28 06:45:01,871 - INFO - Optimizing for category: comp-gas
+2024-11-28 06:45:01,936 - INFO - Error during optimization for category 'comp-gas' with params {'n_neighbors': 50, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,939 - INFO - Error during optimization for category 'comp-gas' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 20, 'min_samples': 5}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,943 - INFO - Error during optimization for category 'comp-gas' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 5, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,946 - INFO - Error during optimization for category 'comp-gas' with params {'n_neighbors': 15, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,949 - INFO - Error during optimization for category 'comp-gas' with params {'n_neighbors': 30, 'min_dist': 0.5, 'min_cluster_size': 5, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,952 - INFO - Error during optimization for category 'comp-gas' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 50, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,956 - INFO - Error during optimization for category 'comp-gas' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 10, 'min_samples': 5}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,959 - INFO - Error during optimization for category 'comp-gas' with params {'n_neighbors': 50, 'min_dist': 0.01, 'min_cluster_size': 20, 'min_samples': 1}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,962 - INFO - Error during optimization for category 'comp-gas' with params {'n_neighbors': 30, 'min_dist': 0.3, 'min_cluster_size': 20, 'min_samples': 1}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,965 - INFO - Error during optimization for category 'comp-gas' with params {'n_neighbors': 15, 'min_dist': 0.3, 'min_cluster_size': 10, 'min_samples': 5}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:01,965 - INFO - No valid results for category 'comp-gas'. Skipping.
+2024-11-28 06:45:01,965 - INFO - Optimizing for category: dg-ga
+2024-11-28 06:45:02,027 - INFO - Error during optimization for category 'dg-ga' with params {'n_neighbors': 50, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,029 - INFO - Error during optimization for category 'dg-ga' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 20, 'min_samples': 5}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,031 - INFO - Error during optimization for category 'dg-ga' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 5, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,033 - INFO - Error during optimization for category 'dg-ga' with params {'n_neighbors': 15, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,035 - INFO - Error during optimization for category 'dg-ga' with params {'n_neighbors': 30, 'min_dist': 0.5, 'min_cluster_size': 5, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,037 - INFO - Error during optimization for category 'dg-ga' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 50, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,039 - INFO - Error during optimization for category 'dg-ga' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 10, 'min_samples': 5}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,041 - INFO - Error during optimization for category 'dg-ga' with params {'n_neighbors': 50, 'min_dist': 0.01, 'min_cluster_size': 20, 'min_samples': 1}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,043 - INFO - Error during optimization for category 'dg-ga' with params {'n_neighbors': 30, 'min_dist': 0.3, 'min_cluster_size': 20, 'min_samples': 1}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,045 - INFO - Error during optimization for category 'dg-ga' with params {'n_neighbors': 15, 'min_dist': 0.3, 'min_cluster_size': 10, 'min_samples': 5}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,045 - INFO - No valid results for category 'dg-ga'. Skipping.
+2024-11-28 06:45:02,045 - INFO - Optimizing for category: funct-an
+2024-11-28 06:45:02,111 - INFO - Error during optimization for category 'funct-an' with params {'n_neighbors': 50, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:02,114 - INFO - Error during optimization for category 'funct-an' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 20, 'min_samples': 5}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:02,118 - INFO - Error during optimization for category 'funct-an' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 5, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:02,121 - INFO - Error during optimization for category 'funct-an' with params {'n_neighbors': 15, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:02,124 - INFO - Error during optimization for category 'funct-an' with params {'n_neighbors': 30, 'min_dist': 0.5, 'min_cluster_size': 5, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:02,127 - INFO - Error during optimization for category 'funct-an' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 50, 'min_samples': 10}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:02,131 - INFO - Error during optimization for category 'funct-an' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 10, 'min_samples': 5}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:02,134 - INFO - Error during optimization for category 'funct-an' with params {'n_neighbors': 50, 'min_dist': 0.01, 'min_cluster_size': 20, 'min_samples': 1}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:02,137 - INFO - Error during optimization for category 'funct-an' with params {'n_neighbors': 30, 'min_dist': 0.3, 'min_cluster_size': 20, 'min_samples': 1}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:02,140 - INFO - Error during optimization for category 'funct-an' with params {'n_neighbors': 15, 'min_dist': 0.3, 'min_cluster_size': 10, 'min_samples': 5}: Cannot use scipy.linalg.eigh for sparse A with k >= N. Use scipy.linalg.eigh(A.toarray()) or reduce k.
+2024-11-28 06:45:02,140 - INFO - No valid results for category 'funct-an'. Skipping.
+2024-11-28 06:45:02,140 - INFO - Optimizing for category: patt-sol
+2024-11-28 06:45:02,205 - INFO - Error during optimization for category 'patt-sol' with params {'n_neighbors': 50, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,207 - INFO - Error during optimization for category 'patt-sol' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 20, 'min_samples': 5}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,209 - INFO - Error during optimization for category 'patt-sol' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 5, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,211 - INFO - Error during optimization for category 'patt-sol' with params {'n_neighbors': 15, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,213 - INFO - Error during optimization for category 'patt-sol' with params {'n_neighbors': 30, 'min_dist': 0.5, 'min_cluster_size': 5, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,215 - INFO - Error during optimization for category 'patt-sol' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 50, 'min_samples': 10}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,217 - INFO - Error during optimization for category 'patt-sol' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 10, 'min_samples': 5}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,219 - INFO - Error during optimization for category 'patt-sol' with params {'n_neighbors': 50, 'min_dist': 0.01, 'min_cluster_size': 20, 'min_samples': 1}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,221 - INFO - Error during optimization for category 'patt-sol' with params {'n_neighbors': 30, 'min_dist': 0.3, 'min_cluster_size': 20, 'min_samples': 1}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,222 - INFO - Error during optimization for category 'patt-sol' with params {'n_neighbors': 15, 'min_dist': 0.3, 'min_cluster_size': 10, 'min_samples': 5}: zero-size array to reduction operation maximum which has no identity
+2024-11-28 06:45:02,222 - INFO - No valid results for category 'patt-sol'. Skipping.
+2024-11-28 06:45:02,223 - INFO - Optimizing for category: q-alg
+2024-11-28 06:45:02,416 - INFO - Completed optimization for category: q-alg
+2024-11-28 06:45:02,416 - INFO - Optimizing for category: solv-int
+2024-11-28 06:45:02,634 - INFO - Completed optimization for category: solv-int
+2024-11-28 06:45:02,634 - INFO - Optimizing for category: supr-con
+2024-11-28 06:45:02,696 - INFO - Error during optimization for category 'supr-con' with params {'n_neighbors': 50, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: k must be less than or equal to the number of training points
+2024-11-28 06:45:02,697 - INFO - Error during optimization for category 'supr-con' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 20, 'min_samples': 5}: k must be less than or equal to the number of training points
+2024-11-28 06:45:02,699 - INFO - Error during optimization for category 'supr-con' with params {'n_neighbors': 15, 'min_dist': 0.1, 'min_cluster_size': 5, 'min_samples': 10}: k must be less than or equal to the number of training points
+2024-11-28 06:45:02,700 - INFO - Error during optimization for category 'supr-con' with params {'n_neighbors': 15, 'min_dist': 0.5, 'min_cluster_size': 10, 'min_samples': 10}: k must be less than or equal to the number of training points
+2024-11-28 06:45:02,701 - INFO - Error during optimization for category 'supr-con' with params {'n_neighbors': 30, 'min_dist': 0.5, 'min_cluster_size': 5, 'min_samples': 10}: k must be less than or equal to the number of training points
+2024-11-28 06:45:02,703 - INFO - Error during optimization for category 'supr-con' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 50, 'min_samples': 10}: k must be less than or equal to the number of training points
+2024-11-28 06:45:02,704 - INFO - Error during optimization for category 'supr-con' with params {'n_neighbors': 30, 'min_dist': 0.01, 'min_cluster_size': 10, 'min_samples': 5}: k must be less than or equal to the number of training points
+2024-11-28 06:45:02,705 - INFO - Error during optimization for category 'supr-con' with params {'n_neighbors': 50, 'min_dist': 0.01, 'min_cluster_size': 20, 'min_samples': 1}: k must be less than or equal to the number of training points
+2024-11-28 06:45:02,707 - INFO - Error during optimization for category 'supr-con' with params {'n_neighbors': 30, 'min_dist': 0.3, 'min_cluster_size': 20, 'min_samples': 1}: k must be less than or equal to the number of training points
+2024-11-28 06:45:02,708 - INFO - Error during optimization for category 'supr-con' with params {'n_neighbors': 15, 'min_dist': 0.3, 'min_cluster_size': 10, 'min_samples': 5}: k must be less than or equal to the number of training points
+2024-11-28 06:45:02,708 - INFO - No valid results for category 'supr-con'. Skipping.
+2024-11-28 06:45:02,708 - INFO - Parameter optimization completed.
+2024-11-28 06:45:02,708 - INFO - Clustering for category: physics
+2024-11-28 06:50:35,669 - INFO - Clustering for category: math
+2024-11-28 07:00:57,327 - INFO - Clustering for category: astro-ph
+2024-11-28 07:06:33,624 - INFO - Clustering for category: quant-ph
+2024-11-28 07:08:26,977 - INFO - Clustering for category: hep-th
+2024-11-28 07:09:08,016 - INFO - Clustering for category: cond-mat
+2024-11-28 07:12:46,830 - INFO - Clustering for category: math-ph
+2024-11-28 07:13:08,127 - INFO - Clustering for category: cs
+2024-11-28 08:08:48,574 - INFO - Clustering for category: gr-qc
+2024-11-28 08:09:44,425 - INFO - Clustering for category: hep-ph
+2024-11-28 08:10:40,785 - INFO - Clustering for category: q-fin
+2024-11-28 08:10:54,521 - INFO - Clustering for category: q-bio
+2024-11-28 08:11:28,039 - INFO - Clustering for category: nucl-th
+2024-11-28 08:11:45,041 - INFO - Clustering for category: hep-ex
+2024-11-28 08:11:59,837 - INFO - Clustering for category: stat
+2024-11-28 08:13:31,624 - INFO - Clustering for category: nlin
+2024-11-28 08:13:46,324 - INFO - Clustering for category: hep-lat
+2024-11-28 08:14:03,273 - INFO - Clustering for category: nucl-ex
+2024-11-28 08:14:15,875 - INFO - Clustering for category: econ
+2024-11-28 08:14:38,351 - INFO - Clustering for category: eess
+2024-11-28 08:17:30,317 - INFO - Clustering for category: chao-dyn
