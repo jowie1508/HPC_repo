@@ -145,7 +145,7 @@ def main():
    
     categories_to_test = df["main_category"].unique().tolist()
     update_status(f"Number of categories (total): {len(categories_to_test)}")
-    results_per_category = {}
+    
     df_optimize = df.sample(frac=0.1, random_state=42)
     df_optimize = df_optimize[df_optimize["main_category"].isin(categories_to_test)]
 
@@ -219,56 +219,90 @@ def main():
     update_status("Parameter optimization completed.")
 
     # Final clustering and saving results
+    failing_category = "chao-dyn"  
+    categories_to_run = list(results_per_category.keys())
+
+    # Ensure the failing category is processed first
+    if failing_category in categories_to_run:
+        categories_to_run.remove(failing_category)
+        categories_to_run = [failing_category] + categories_to_run
+
     final_cluster_data = {}
     visualization_data = []
     metrics_summary = {}
-    for category, params in results_per_category.items():
-        update_status(f"Clustering for category: {category}")
-        category_df = df[df["main_category"] == category]
-        content = category_df["cleaned_content_str"].tolist()
-        embeddings = embedding_model.encode(content, show_progress_bar=True)
 
-        reducer = UMAP(
-            n_neighbors=params["n_neighbors"],
-            min_dist=params["min_dist"],
-            n_components=2,
-            metric="cosine",
-        )
-        reduced_embeddings = reducer.fit_transform(embeddings)
+    for category in categories_to_test:
+        try:
+            update_status(f"Clustering for category: {category}")
+            category_df = df[df["main_category"] == category]
+            content = category_df["cleaned_content_str"].tolist()
 
-        clusterer = hdbscan.HDBSCAN(
-            min_cluster_size=params["min_cluster_size"],
-            min_samples=params["min_samples"],
-        )
-        labels = clusterer.fit_predict(reduced_embeddings)
-
-        vis_data = pd.DataFrame(
-            {"category": category, "umap1": reduced_embeddings[:, 0], "umap2": reduced_embeddings[:, 1], "label": labels}
-        )
-        visualization_data.append(vis_data)
-
-        cluster_data = {"clusters": [], "noise": []}
-        for cluster_id in set(labels):
-            if cluster_id == -1:
+            # Skip if no content is available
+            if not content:
+                update_status(f"Skipping category {category} due to empty content.")
                 continue
-            cluster_docs = category_df.loc[labels == cluster_id, "cleaned_content_str"].tolist()
-            top_keywords = extract_tfidf_keywords(cluster_docs)
-            cluster_data["clusters"].append({
-                "cluster_id": int(cluster_id),
-                "keywords": list(top_keywords),
-                "num_docs": len(cluster_docs),
-                "docs": cluster_docs
-            })
 
-        noise_docs = category_df.loc[labels == -1, "cleaned_content_str"].tolist()
-        cluster_data["noise"] = list(noise_docs)
-        final_cluster_data[category] = cluster_data
+            embeddings = embedding_model.encode(content, show_progress_bar=True)
 
-        core_embeddings = reduced_embeddings[labels != -1]
-        core_labels = labels[labels != -1]
-        dbi = davies_bouldin_score(core_embeddings, core_labels)
-        silhouette = silhouette_score(core_embeddings, core_labels)
-        metrics_summary[category] = {"dbi": dbi, "silhouette": silhouette}
+            params = results_per_category[category]  # Retrieve parameters for the category
+            reducer = UMAP(
+                n_neighbors=params["n_neighbors"],
+                min_dist=params["min_dist"],
+                n_components=2,
+                metric="cosine",
+            )
+            reduced_embeddings = reducer.fit_transform(embeddings)
+
+            clusterer = hdbscan.HDBSCAN(
+                min_cluster_size=params["min_cluster_size"],
+                min_samples=params["min_samples"],
+            )
+            labels = clusterer.fit_predict(reduced_embeddings)
+
+            vis_data = pd.DataFrame(
+                {
+                    "category": category,
+                    "umap1": reduced_embeddings[:, 0],
+                    "umap2": reduced_embeddings[:, 1],
+                    "label": labels,
+                }
+            )
+            visualization_data.append(vis_data)
+
+            cluster_data = {"clusters": [], "noise": []}
+            for cluster_id in set(labels):
+                if cluster_id == -1:
+                    continue
+                cluster_docs = category_df.loc[labels == cluster_id, "cleaned_content_str"].tolist()
+                top_keywords = extract_tfidf_keywords(cluster_docs)
+                cluster_data["clusters"].append(
+                    {
+                        "cluster_id": int(cluster_id),
+                        "keywords": list(top_keywords),
+                        "num_docs": len(cluster_docs),
+                        "docs": cluster_docs,
+                    }
+                )
+
+            noise_docs = category_df.loc[labels == -1, "cleaned_content_str"].tolist()
+            cluster_data["noise"] = list(noise_docs)
+            final_cluster_data[category] = cluster_data
+
+            # Filter out noise for metrics
+            core_embeddings = reduced_embeddings[labels != -1]
+            core_labels = labels[labels != -1]
+
+            if len(core_embeddings) > 1:  # Ensure there are enough samples
+                dbi = davies_bouldin_score(core_embeddings, core_labels)
+                silhouette = silhouette_score(core_embeddings, core_labels)
+            else:
+                dbi, silhouette = float("inf"), -1  # Default values for insufficient samples
+
+            metrics_summary[category] = {"dbi": dbi, "silhouette": silhouette}
+
+        except Exception as e:
+            update_status(f"Error processing category {category}: {e}")
+            continue
 
     # Save clustering data to JSON
     output_file = "hdbscan_cluster_results.json"
@@ -277,9 +311,10 @@ def main():
     update_status(f"Cluster data saved to {output_file}")
 
     # Save visualization data
-    visualization_df = pd.concat(visualization_data)
-    visualization_df.to_csv("clustering_visualization_data.csv", index=False)
-    update_status("Visualization data saved.")
+    if visualization_data:
+        visualization_df = pd.concat(visualization_data)
+        visualization_df.to_csv("clustering_visualization_data.csv", index=False)
+        update_status("Visualization data saved.")
 
     print("Pipeline complete.")
 
