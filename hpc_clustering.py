@@ -16,6 +16,10 @@ from sentence_transformers import SentenceTransformer
 from collections import Counter
 import logging
 import subprocess
+from nltk.stem import PorterStemmer
+
+stemmer = PorterStemmer()
+
 nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('wordnet')
@@ -34,6 +38,15 @@ logging.basicConfig(
 
 # Global constants
 FILE = "arxiv-metadata-oai-snapshot.json"
+
+# Define the mapping of categories to broader groups
+CATEGORY_GROUPS = {
+    "physics": ["physics", "astro-ph", "quant-ph", "hep-th", "cond-mat", "gr-qc", "hep-ph", "nucl-th", "hep-ex", "hep-lat", "nucl-ex", "eess"],
+    "math": ["math", "math-ph", "stat", "nlin"],
+    "finances": ["econ", "q-fin"],
+    "computer_science": ["cs"],
+    "biology": ["q-bio"]
+}
 
 def download_dataset():
     try:
@@ -70,13 +83,12 @@ def load_data(file_path):
             paper = json.loads(line)
             try:
                 date = int(paper["update_date"].split("-")[0])
-                if date > 2019:
-                    dataframe["title"].append(paper["title"])
-                    dataframe["year"].append(date)
-                    dataframe["authors"].append(paper["authors"])
-                    dataframe["categories"].append(paper["categories"])
-                    dataframe["journal-ref"].append(paper["journal-ref"])
-                    dataframe["abstract"].append(paper["abstract"])
+                dataframe["title"].append(paper["title"])
+                dataframe["year"].append(date)
+                dataframe["authors"].append(paper["authors"])
+                dataframe["categories"].append(paper["categories"])
+                dataframe["journal-ref"].append(paper["journal-ref"])
+                dataframe["abstract"].append(paper["abstract"])
             except:
                 pass
     df = pd.DataFrame(dataframe)
@@ -103,21 +115,64 @@ def extract_main_category(category_str):
     main_categories = [cat.split(".")[0] for cat in categories]
     return main_categories[0]
 
-# Function to extract TF-IDF keywords
-def extract_tfidf_keywords(documents, max_features=10):
-    vectorizer = TfidfVectorizer(max_features=max_features, ngram_range=(1, 3))
+# Updated TF-IDF keyword extraction
+def extract_tfidf_keywords(documents, max_features=50, ngram_range=(1, 3), max_keywords=25):
+    """
+    Extracts TF-IDF keywords with n-gram support, stemming, and deduplication.
+    Returns the top `max_keywords` based on TF-IDF scores.
+    """
+    if not documents:
+        return []
+
+    # TF-IDF vectorization with n-grams
+    vectorizer = TfidfVectorizer(
+        max_features=max_features,
+        stop_words="english",
+        ngram_range=ngram_range,
+    )
     tfidf_matrix = vectorizer.fit_transform(documents)
-    top_keywords = vectorizer.get_feature_names_out()
-    return top_keywords
+    keywords = vectorizer.get_feature_names_out()
+    scores = tfidf_matrix.sum(axis=0).A1  # Sum TF-IDF scores across all documents
+    keyword_scores = sorted(zip(keywords, scores), key=lambda x: x[1], reverse=True)
+
+    # Extract and process keywords with stemming
+    stemmed_keywords = {}
+    for keyword, _ in keyword_scores:
+        stem = stemmer.stem(keyword)
+        if stem not in stemmed_keywords:
+            stemmed_keywords[stem] = keyword
+
+    # Return deduplicated, stemmed keywords limited to `max_keywords`
+    deduplicated_keywords = list(stemmed_keywords.values())
+    return deduplicated_keywords[:max_keywords]
+
+
+# Function to map categories to broader groups
+def map_to_broad_category(category_str):
+    if not isinstance(category_str, str):
+        return None  # Return None for invalid entries
+
+    # Extract the main category
+    categories = category_str.split()
+    main_categories = [cat.split(".")[0] for cat in categories]
+    main_category = main_categories[0]
+
+    # Map the main category to a broader group
+    for broad_category, category_list in CATEGORY_GROUPS.items():
+        if main_category in category_list:
+            return broad_category
+
+    # If no match, return "others"
+    return "others"
 
 # Main pipeline function
 def main():
     # Load the dataset
-   #  d# # ownload_dataset()
+    # download_dataset()
     update_status("Loading dataset...")
-   # df = load_data(FILE)
+    # df = load_data(FILE)
     # uncomment while testing
-    #df = df.sample(frac=0.001, random_state=42)
+    # df = df.sample(frac=0.001, random_state=42)
 
     # Preprocess the dataset
     #stop_words = set(stopwords.words("english"))
@@ -130,6 +185,15 @@ def main():
     #df["cleaned_content_str"] = df["cleaned_content"].apply(lambda x: " ".join(x))
     df = pd.read_csv("preprocessed_data.csv")
     update_status("Loaded dataset...")
+
+    df["broad_category"] = df["categories"].apply(map_to_broad_category)
+    uncategorized_categories = (
+        df.loc[df["broad_category"] == "others", "categories"]
+        .apply(lambda x: x.split()[0].split(".")[0])
+        .unique()
+    )
+    update_status("Uncategorized categories:", uncategorized_categories)
+
    
    # Optimize parameters for each category
    
@@ -143,11 +207,11 @@ def main():
     else:
         results_per_category = {}
    
-    categories_to_test = df["main_category"].unique().tolist()
+    categories_to_test = df["broad_category"].unique().tolist()
     update_status(f"Number of categories (total): {len(categories_to_test)}")
     
     df_optimize = df.sample(frac=0.1, random_state=42)
-    df_optimize = df_optimize[df_optimize["main_category"].isin(categories_to_test)]
+    df_optimize = df_optimize[df_optimize["broad_category"].isin(categories_to_test)]
 
     embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
     param_space = {
@@ -165,18 +229,14 @@ def main():
         }
         for _ in range(10)
     ]
-    # Reorder categories_to_test to prioritize 'adap-org'
-    failing_category = "adap-org"
-    if failing_category in categories_to_test:
-        categories_to_test.remove(failing_category)
-    categories_to_test = [failing_category] + categories_to_test
+
     for category in categories_to_test:
        # Skip already processed categories
         if category in results_per_category:
             update_status(f"Skipping already processed category: {category}")
             continue
         update_status(f"Optimizing for category: {category}")
-        category_df = df[df["main_category"] == category]
+        category_df = df[df["broad_category"] == category]
         content = category_df["cleaned_content_str"].tolist()
         embeddings = embedding_model.encode(content, show_progress_bar=True)
 
@@ -219,19 +279,13 @@ def main():
     update_status("Parameter optimization completed.")
 
     # Final clustering and saving results
-    failing_category = "chao-dyn"  
     categories_to_run = list(results_per_category.keys())
-
-    # Ensure the failing category is processed first
-    if failing_category in categories_to_run:
-        categories_to_run.remove(failing_category)
-        categories_to_run = [failing_category] + categories_to_run
 
     final_cluster_data = {}
     visualization_data = []
     metrics_summary = {}
 
-    for category in categories_to_test:
+    for category in categories_to_run:
         try:
             update_status(f"Clustering for category: {category}")
             category_df = df[df["main_category"] == category]
@@ -274,6 +328,7 @@ def main():
                 if cluster_id == -1:
                     continue
                 cluster_docs = category_df.loc[labels == cluster_id, "cleaned_content_str"].tolist()
+                cluster_titles = category_df.loc[labels == cluster_id, "title"].tolist()
                 top_keywords = extract_tfidf_keywords(cluster_docs)
                 cluster_data["clusters"].append(
                     {
@@ -281,6 +336,7 @@ def main():
                         "keywords": list(top_keywords),
                         "num_docs": len(cluster_docs),
                         "docs": cluster_docs,
+                        "doc_titles": cluster_titles
                     }
                 )
 
@@ -309,6 +365,12 @@ def main():
     with open(output_file, "w") as f:
         json.dump(final_cluster_data, f, indent=4)
     update_status(f"Cluster data saved to {output_file}")
+
+    # Save metrics 
+    output_file = "hdbscan_metrics.json"
+    with open(output_file, "w") as f:
+        json.dump(final_cluster_data, f, indent=4)
+    update_status(f"Cluster metrics saved to {output_file}")
 
     # Save visualization data
     if visualization_data:

@@ -10,9 +10,8 @@
 # request 150GB of system-memory
 #BSUB -R "rusage[mem=150GB]"
 
-source venv/bin/activate
-pip install -r requirements.txt
-cd examples/00_quick_start
+cd /zhome/14/b/214266/HPC_repo
+source venv39/bin/activate
 
 module load cuda/12.2
 echo $CUDA_HOME
