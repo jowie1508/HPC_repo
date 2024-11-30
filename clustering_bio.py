@@ -110,7 +110,7 @@ def main():
 
    
     # Files
-    category = "physics"
+    category = "biology"
     metrics_file = f"metrics_{category}.json"
     output_file = f"clusters_{category}.json"
     visualization_file = f"clustering_visualization_data_{category}.csv"
