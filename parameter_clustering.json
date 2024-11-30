@@ -1,0 +1,44 @@
+{
+    "physics": {
+        "n_neighbors": 5,
+        "min_dist": 0.5,
+        "min_cluster_size": 50,
+        "min_samples": 10,
+        "dbi": 1.0946573590977149
+    },
+    "math": {
+        "n_neighbors": 5,
+        "min_dist": 0.5,
+        "min_cluster_size": 50,
+        "min_samples": 10,
+        "dbi": 1.1250152493516397
+    },
+    "biology": {
+        "n_neighbors": 5,
+        "min_dist": 0.25,
+        "min_cluster_size": 50,
+        "min_samples": 10,
+        "dbi": 1.1087626192683624
+    },
+    "computer_science": {
+        "n_neighbors": 5,
+        "min_dist": 0.5,
+        "min_cluster_size": 50,
+        "min_samples": 10,
+        "dbi": 1.0794608011280058
+    },
+    "finances": {
+        "n_neighbors": 5,
+        "min_dist": 0.25,
+        "min_cluster_size": 25,
+        "min_samples": 10,
+        "dbi": 1.1249786661277807
+    },
+    "others": {
+        "n_neighbors": 50,
+        "min_dist": 0.3,
+        "min_cluster_size": 10,
+        "min_samples": 5,
+        "dbi": 0.24082969670483723
+    }
+}
