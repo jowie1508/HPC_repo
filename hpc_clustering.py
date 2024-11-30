@@ -192,7 +192,7 @@ def main():
         .apply(lambda x: x.split()[0].split(".")[0])
         .unique()
     )
-    update_status("Uncategorized categories: {uncategorized_categories}")
+    update_status("Uncategorized categories:")
 
    
    # Optimize parameters for each category
@@ -236,7 +236,7 @@ def main():
             update_status(f"Skipping already processed category: {category}")
             continue
         update_status(f"Optimizing for category: {category}")
-        category_df = df_optimize[df_optimize["broad_category"] == category]
+        category_df = df[df["broad_category"] == category]
         content = category_df["cleaned_content_str"].tolist()
         embeddings = embedding_model.encode(content, show_progress_bar=True)
 
@@ -281,12 +281,32 @@ def main():
     # Final clustering and saving results
     categories_to_run = list(results_per_category.keys())
 
-    final_cluster_data = {}
-    visualization_data = []
-    metrics_summary = {}
+    # Load existing results if the output file exists
+    output_file = "hdbscan_cluster_results.json"
+    metrics_file = "hdbscan_metrics.json"
 
+    if os.path.exists(output_file):
+        with open(output_file, "r") as f:
+            final_cluster_data = json.load(f)
+    else:
+        final_cluster_data = {}
+
+    if os.path.exists(metrics_file):
+        with open(metrics_file, "r") as f:
+            metrics_summary = json.load(f)
+    else:
+        metrics_summary = {}
+
+    visualization_data = []
+
+    # Clustering logic
     for category in categories_to_run:
         try:
+            # Skip if the category is already processed
+            if category in final_cluster_data:
+                update_status(f"Skipping category {category}, already processed.")
+                continue
+
             update_status(f"Clustering for category: {category}")
             category_df = df[df["broad_category"] == category]
             content = category_df["cleaned_content_str"].tolist()
@@ -336,7 +356,7 @@ def main():
                         "keywords": list(top_keywords),
                         "num_docs": len(cluster_docs),
                         "docs": cluster_docs,
-                        "doc_titles": cluster_titles
+                        "doc_titles": cluster_titles,
                     }
                 )
 
@@ -356,21 +376,19 @@ def main():
 
             metrics_summary[category] = {"dbi": dbi, "silhouette": silhouette}
 
+            # Save current category results incrementally
+            with open(output_file, "w") as f:
+                json.dump(final_cluster_data, f, indent=4)
+            update_status(f"Results for category {category} saved to {output_file}")
+
+            # Save metrics incrementally
+            with open(metrics_file, "w") as f:
+                json.dump(metrics_summary, f, indent=4)
+            update_status(f"Metrics for category {category} saved to {metrics_file}")
+
         except Exception as e:
             update_status(f"Error processing category {category}: {e}")
             continue
-
-    # Save clustering data to JSON
-    output_file = "hdbscan_cluster_results.json"
-    with open(output_file, "w") as f:
-        json.dump(final_cluster_data, f, indent=4)
-    update_status(f"Cluster data saved to {output_file}")
-
-    # Save metrics 
-    output_file = "hdbscan_metrics.json"
-    with open(output_file, "w") as f:
-        json.dump(final_cluster_data, f, indent=4)
-    update_status(f"Cluster metrics saved to {output_file}")
 
     # Save visualization data
     if visualization_data:
