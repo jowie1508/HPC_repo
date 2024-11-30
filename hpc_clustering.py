@@ -192,7 +192,7 @@ def main():
         .apply(lambda x: x.split()[0].split(".")[0])
         .unique()
     )
-    update_status("Uncategorized categories:", uncategorized_categories)
+    update_status("Uncategorized categories: {uncategorized_categories}")
 
    
    # Optimize parameters for each category
@@ -236,7 +236,7 @@ def main():
             update_status(f"Skipping already processed category: {category}")
             continue
         update_status(f"Optimizing for category: {category}")
-        category_df = df[df["broad_category"] == category]
+        category_df = df_optimize[df_optimize["broad_category"] == category]
         content = category_df["cleaned_content_str"].tolist()
         embeddings = embedding_model.encode(content, show_progress_bar=True)
 
@@ -288,7 +288,7 @@ def main():
     for category in categories_to_run:
         try:
             update_status(f"Clustering for category: {category}")
-            category_df = df[df["main_category"] == category]
+            category_df = df[df["broad_category"] == category]
             content = category_df["cleaned_content_str"].tolist()
 
             # Skip if no content is available
