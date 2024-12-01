@@ -17,4 +17,4 @@ module load cuda/12.4
 echo $CUDA_HOME
 export XLA_FLAGS=--xla_gpu_cuda_data_dir=$CUDA_HOME
 
-python3 clustering_math.py
+python3 clustering_maths_chunked.py
