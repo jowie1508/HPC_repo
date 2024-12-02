@@ -94,7 +94,6 @@ def map_to_broad_category(category_str):
     # If no match, return "others"
     return "others"
 
-# Main pipeline function
 def main():
     # Load the dataset
     update_status("Loading dataset...")
@@ -121,21 +120,25 @@ def main():
             results_per_category = json.load(f)
     else:
         update_status("No parameter file found")
+        return
 
-    params = results_per_category[category]
+    params = results_per_category.get(category, {})
+    if not params:
+        update_status(f"No parameters found for category: {category}")
+        return
 
-    # Load embeddings and cluster results
-    if os.path.exists(output_file):
-        with open(output_file, "r") as f:
-            final_cluster_data = json.load(f)
-    else:
-        final_cluster_data = {}
-
+    # Load previously saved metrics and clusters
     if os.path.exists(metrics_file):
         with open(metrics_file, "r") as f:
             metrics_summary = json.load(f)
     else:
         metrics_summary = {}
+
+    if os.path.exists(output_file):
+        with open(output_file, "r") as f:
+            final_cluster_data = json.load(f)
+    else:
+        final_cluster_data = {}
 
     visualization_data = []
 
@@ -161,6 +164,13 @@ def main():
     ]
 
     for i, (chunk_embeddings, chunk_df) in enumerate(chunks):
+        chunk_id = f"{category}_chunk_{i + 1}"
+
+        # Skip already processed chunks
+        if chunk_id in metrics_summary:
+            update_status(f"Skipping already processed chunk {i + 1}/{num_chunks} for category: {category}")
+            continue
+
         try:
             update_status(f"Processing chunk {i + 1}/{num_chunks} for category: {category}")
 
@@ -207,7 +217,7 @@ def main():
 
             noise_docs = chunk_df.loc[labels == -1, "cleaned_content_str"].tolist()
             cluster_data["noise"] = list(noise_docs)
-            final_cluster_data[f"{category}_chunk_{i + 1}"] = cluster_data
+            final_cluster_data[chunk_id] = cluster_data
 
             # Filter out noise for metrics
             core_embeddings = reduced_embeddings[labels != -1]
@@ -219,7 +229,7 @@ def main():
             else:
                 dbi, silhouette = float("inf"), -1  # Default values for insufficient samples
 
-            metrics_summary[f"{category}_chunk_{i + 1}"] = {"dbi": dbi, "silhouette": silhouette}
+            metrics_summary[chunk_id] = {"dbi": dbi, "silhouette": silhouette}
             update_status(f"DBI for chunk {i + 1}: {dbi}")
             update_status(f"Silhouette for chunk {i + 1}: {silhouette}")
 
@@ -244,6 +254,7 @@ def main():
         update_status("Visualization data saved.")
 
     print("Pipeline complete.")
+
 
 if __name__ == "__main__":
     main()
