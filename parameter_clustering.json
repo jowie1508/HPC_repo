@@ -8,7 +8,7 @@
     },
     "math": {
         "n_neighbors": 5,
-        "min_dist": 0.5,
+        "min_dist": 0.25,
         "min_cluster_size": 50,
         "min_samples": 10,
         "dbi": 1.1250152493516397
@@ -22,7 +22,7 @@
     },
     "computer_science": {
         "n_neighbors": 5,
-        "min_dist": 0.5,
+        "min_dist": 0.25,
         "min_cluster_size": 50,
         "min_samples": 10,
         "dbi": 1.0794608011280058

@@ -1,7 +1,7 @@
 #!/bin/sh
 ### General options
 ### -- set the job Name --
-#BSUB -J jonas_150GB
+#BSUB -J cs
 ### -- ask for number of cores (default: 1) --
 #BSUB -q gpua100
 #BSUB -n 1
