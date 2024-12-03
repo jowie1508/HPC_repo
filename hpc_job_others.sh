@@ -8,14 +8,13 @@
 ### -- set walltime limit: hh:mm -- maximum 24 hours for GPU-queues right now
 #BSUB -W 10:00
 # request 150GB of system-memory
-#BSUB -R "rusage[mem=150GB]"
+#BSUB -R "rusage[mem=100GB]"
 
-source venv/bin/activate
-pip install -r requirements.txt
-cd examples/00_quick_start
+cd /zhome/14/b/214266/HPC_repo
+source venv39/bin/activate
 
-module load cuda/12.2
+module load cuda/12.4
 echo $CUDA_HOME
 export XLA_FLAGS=--xla_gpu_cuda_data_dir=$CUDA_HOME
 
-python3 hpc_clustering.py
+python3 clustering_others.py
